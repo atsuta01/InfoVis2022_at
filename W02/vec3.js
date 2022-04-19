@@ -60,4 +60,19 @@ class Vec3
     {
 	return Math.sqrt( this.x * this.x + this.y * this.y + this.z * this.z );
     }
+
+    AreaOfTriangle( v1, v2, v3 )
+    {
+	var b1 = v2.x - v1.x;
+	var b2 = v2.y - v1.y;
+	var b3 = v2.z - v1.z;
+
+	var c1 = v3.x - v1.x;
+	var c2 = v3.y - v1.y;
+	var c3 = v3.z - v1.z;
+
+	var S =  Math.sqrt( (b1*c2 - b2*c1)** + (b2*c3 - b3*c2)** + (b3*c1 - b1*c3)**) * 0.5;
+
+	return S;
+    }
 }

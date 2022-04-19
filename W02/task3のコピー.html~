@@ -1,0 +1,64 @@
+<html>
+    <head>
+	<title>W02: task3</title>
+    </head>
+    <body>
+        <label>x0:<input type="number"
+	       id="x_point1"></label>
+	<label>y0:<input type="number"
+	       id="y_point1"></label>
+	<label>z0:<input type="number"
+	       id="z_point1"></label>
+	<label>x1:<input type="number"
+	       id="x_point2"></label>
+	<label>y1:<input type="number"
+	       id="y_point2"></label>
+	<label>z1:<input type="number"
+	       id="z_point2"></label>
+	<label>x2:<input type="number"
+	       id="x_point3"></label>
+	<label>y2:<input type="number"
+	       id="y_point3"></label>
+	<label>z2:<input type="number"
+	       id="z_point3"></label>
+	<input type="button"
+	       value="input"
+	       onclick="buttonClick()"/>
+	<script src="vec3.js"></script>
+	<script>
+	  function buttonClick()
+	  {
+	    var x0 = document.getElementById("x_point1");
+	    var y0 = document.getElementById("y_point1");
+	    var z0 = document.getElementById("z_point1");
+	    var x1 = document.getElementById("x_point2");
+	    var y1 = document.getElementById("y_point2");
+	    var z1 = document.getElementById("z_point2");
+	    var x2 = document.getElementById("x_point3");
+	    var y2 = document.getElementById("y_point3");
+	    var z2 = document.getElementById("z_point3");
+	 
+	    var v0 = new Vec3( x0, y0, z0 );
+	    var v1 = new Vec3( x1, y1, z1 );
+	    var v2 = new Vec3( x2, y2, z2 );
+	    //var S = AreaofTriangle( v0, v1, v2 )
+
+
+	    var b1 = x1 - x0;
+	    var b2 = y1 - y0;
+	    var b3 = z1 - z0;
+
+	    var c1 = x2 - x0;
+	    var c2 = y2 - y0;
+	    var c3 = z2 - z0;
+
+	    var S2 =  Math.sqrt( (b1*c2 - b2*c1)** + (b2*c3 - b3*c2)** + (b3*c1 - b1*c3)**) * 0.5;
+	  
+	    document.writeln("pointA=(" + x0.value + "," + y0.value + "," + z0.value +"),");
+	    document.writeln("pointB=(" + x1.value + "," + y1.value + "," + z1.value +"),");
+	    document.writeln("pointC=(" + x2.value + "," + y2.value + "," + z2.value +"),");
+	    document.writeln("S=" + S2)
+	  }
+	</script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+    <head>
+	<title>W02: task3</title>
+    </head>
+    <body>
+        <label>x0:<input type="number"
+	       id="x_point1"></label>
+	<label>y0:<input type="number"
+	       id="y_point1"></label>
+	<label>z0:<input type="number"
+	       id="z_point1"></label>
+	<label>x1:<input type="number"
+	       id="x_point2"></label>
+	<label>y1:<input type="number"
+	       id="y_point2"></label>
+	<label>z1:<input type="number"
+	       id="z_point2"></label>
+	<label>x2:<input type="number"
+	       id="x_point3"></label>
+	<label>y2:<input type="number"
+	       id="y_point3"></label>
+	<label>z2:<input type="number"
+	       id="z_point3"></label>
+	<input type="button"
+	       value="input"
+	       onclick="buttonClick()"/>
+	<script src="vec3.js"></script>
+	<script>
+	  function buttonClick()
+	  {
+	    var x0 = document.getElementById("x_point1");
+	    var y0 = document.getElementById("y_point1");
+	    var z0 = document.getElementById("z_point1");
+	    var x1 = document.getElementById("x_point2");
+	    var y1 = document.getElementById("y_point2");
+	    var z1 = document.getElementById("z_point2");
+	    var x2 = document.getElementById("x_point3");
+	    var y2 = document.getElementById("y_point3");
+	    var z2 = document.getElementById("z_point3");
+	  
+	    document.writeln("pointA=(" + x0.value + "," + y0.value + "," + z0.value +"),");
+	    document.writeln("pointB=(" + x1.value + "," + y1.value + "," + z1.value +"),");
+	    document.writeln("pointC=(" + x2.value + "," + y2.value + "," + z2.value +"),");
+	    document.writeln("S=2")
+	  }
+	</script>
+    </body>
+</html>
