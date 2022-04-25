@@ -1,4 +1,4 @@
-x,y,w,h,f,s
-60,20,50,30,red,label 1
-60,60,150,30,blue,label 2
-60,100,120,30,yellow,label 3
+x,y,w,h,f,s,y2
+60,20,50,30,red,label 1,40
+60,60,150,30,blue,label 2,80
+60,100,120,30,yellow,label 3,120
