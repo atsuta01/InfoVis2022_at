@@ -17,6 +17,14 @@
 	        .attr("width", function(d){ return d.w; })
 	        .attr("height", function(d){ return d.h; })
 	        .attr("fill", function(d){ return d.f; })
+
+	     svg.selectAll("text")
+	        .data(data2)
+	        .enter()
+	        .append("text")
+	        .attr("x", function(d){ return d.x; })
+	        .attr("y", function(d){ return d.y; })
+	        .text("a")
 	 };
 	</script>
     </body>
