@@ -1,15 +1,15 @@
 <html>
     <head>
-        <title>W04: Example 12</title>
+        <title>W04: Task 2</title>
     </head>
     <body>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script>
 	 var svg = d3.select("body").append("svg");
 	 d3.csv("https://atsuta01.github.io/InfoVis2022_at/W04/data2.csv", draw );
-	 function draw(data){
+	 function draw(data2){
 	     svg.selectAll("rect")
-		.data(data)
+		.data(data2)
 	        .enter()
 	        .append("rect")
 	        .attr("x", function(d){ return d.x; })
@@ -17,7 +17,7 @@
 	        .attr("width", function(d){ return d.w; })
 	        .attr("height", function(d){ return d.h; })
 	        .attr("fill", function(d){ return d.f; })
-	 }
+	 };
 	</script>
     </body>
 </html>
