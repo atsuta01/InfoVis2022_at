@@ -23,7 +23,7 @@ class ScatterPlot {
             parent: config.parent,
             width: config.width || 256,
             height: config.height || 256,
-            margin: config.margin || {top:10, right:10, bottom:10, left:10}
+            margin: config.margin || {top:30, right:30, bottom:60, left:60} //軸を表示するため下と左を大きく
         }
         this.data = data;
         this.init();
@@ -52,11 +52,11 @@ class ScatterPlot {
             .ticks(6);
 
         self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(20, ${self.inner_height})`);
+            .attr('transform', `translate(20, ${self.inner_width})`);
 
 	//changes
 	self.yaxis = d3.axisLeft( self.yscale )
-	    .ticks(6);
+	    .ticks(6); //軸メモリの数を制御する。整数値
 
 	self.yaxis_group = self.chart.append('g')
 	    .attr('transform', 'translate(20, ${self.inner_height})');
@@ -67,7 +67,7 @@ class ScatterPlot {
 
         const xmin = d3.min( self.data, d => d.x );
         const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin, xmax] );
+        self.xscale.domain( [xmin, xmax] ); //ここxmin-10とxmax+10にするといけるらしい
 
         const ymin = d3.min( self.data, d => d.y );
         const ymax = d3.max( self.data, d => d.y );
