@@ -6,15 +6,16 @@ d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
             parent: '#drawing_region',
             width: 256,
             height: 256,
-            margin: {top:10, right:10, bottom:20, left:10}
+            margin: {top:30, right:30, bottom:60, left:60} //軸を表示するため下と左を大きく
         };
 
-        const scatter_plot = new ScatterPlot( config, data );
+        const scatter_plot = new ScatterPlot( config, data ); //クラスを実体化
         scatter_plot.update();
     })
     .catch( error => {
         console.log( error );
     });
+
 
 class ScatterPlot {
 
@@ -32,34 +33,34 @@ class ScatterPlot {
     init() {
         let self = this;
 
-        self.svg = d3.select( self.config.parent )
+        self.svg = d3.select( self.config.parent ) //外側の四角
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
-        self.chart = self.svg.append('g')
+        self.chart = self.svg.append('g') //内側の四角
             .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
 
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
-        self.xscale = d3.scaleLinear()
+        self.xscale = d3.scaleLinear() //内側の四角にスケーリング
             .range( [0, self.inner_width] );
 
-        self.yscale = d3.scaleLinear()
+        self.yscale = d3.scaleLinear() //内側の四角にスケーリング
             .range( [0, self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(6);
 
         self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(20, ${self.inner_width})`);
+            .attr('transform', `translate(0, ${self.inner_width})`);
 
 	//changes
 	self.yaxis = d3.axisLeft( self.yscale )
 	    .ticks(6); //軸メモリの数を制御する。整数値
 
 	self.yaxis_group = self.chart.append('g')
-	    .attr('transform', 'translate(20, ${self.inner_height})');
+	    .attr('transform', 'translate(0, ${self.inner_height})');
     }
 
     update() {
