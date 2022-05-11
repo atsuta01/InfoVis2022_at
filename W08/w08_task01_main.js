@@ -1,36 +1,36 @@
-d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
+d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
 
         var config = {
             parent: '#drawing_region',
-            width: 512,
-            height: 512,
-            margin: {top:60, right:60, bottom:100, left:100}
+            width: 256,
+            height: 256,
+            margin: {top:10, right:10, bottom:30, left:30}
         };
 
-        const scatter_plot = new ScatterPlot( config, data );
-        scatter_plot.update();
+        const bar_chart = new BarChart( config, data );
+        bar_chart.update();
     })
     .catch( error => {
         console.log( error );
     });
 
 
-class ScatterPlot {
+class BarChart {
 
     constructor( config, data ) {
         this.config = {
             parent: config.parent,
-            width: config.width || 512,
-            height: config.height || 512,
-            margin: config.margin || {top:60, right:60, bottom:100, left:100}
+            width: config.width || 256,
+            height: config.height || 256,
+            margin: config.margin || {top:10, right:10, bottom:30, left:30}
         }
         this.data = data;
         this.init();
     }
 
-    init() {
+   init() {
         let self = this;
 
         self.svg = d3.select( self.config.parent )
@@ -59,10 +59,14 @@ class ScatterPlot {
 	    .ticks(10);
 
 	self.yaxis_group = self.chart.append('g')
-	    .attr('transform', 'translate(0, ${self.inner_height})');
-    }
+ 	    .attr('transform', 'translate(0, ${self.inner_height})');
 
-    update() {
+       self.line = d3.line()
+           .x( d => d.x)
+           .y( d => d.y);
+   }
+
+   update() {
         let self = this;
 
         const xmin = d3.min( self.data, d => d.x );
@@ -74,9 +78,9 @@ class ScatterPlot {
         self.yscale.domain( [0, ymax+10] );
 
         self.render();
-    }
+   }
 
-    render() {
+   render() {
         let self = this;
 
         self.chart.selectAll("circle")
@@ -86,17 +90,16 @@ class ScatterPlot {
             .attr("cx", d => self.xscale( d.x ) )
             .attr("cy", d => self.yscale( d.y ) )
             .attr("r", d => d.r );
-	    .attr('transform', 'rotate(5)translate(0,0)');
+            .append("path")
+            .attr("d", line(data))
+            .attr("stroke", "black")
+            .attr("fill", "none")
 
         self.xaxis_group
             .call( self.xaxis );
 
 	self.yaxis_group
 	    .call( self.yaxis );
-
-        self.append("text")
-	    .attr("y", 0)
-	    .attr("x", 0)
-	    .text("xlabel")
     }
 }
+    
