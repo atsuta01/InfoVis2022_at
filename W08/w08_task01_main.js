@@ -1,4 +1,4 @@
-d3.csv("https://atsuta01.github.io/InfoVis2022_at/W04/data2.csv")
+d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data2.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; d.w = +d.w; d.h = +d.h; });
 
