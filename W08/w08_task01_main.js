@@ -1,6 +1,6 @@
-d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data.csv")
+d3.csv("https://atsuta01.github.io/InfoVis2022_at/W04/data2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
+        data.forEach( d => { d.x = +d.x; d.y = +d.y; d.w = +d.w; d.h = +d.h; });
 
         var config = {
             parent: '#drawing_region',
@@ -60,10 +60,6 @@ class BarChart {
 
 	self.yaxis_group = self.chart.append('g')
  	    .attr('transform', 'translate(0, ${self.inner_height})');
-
-       self.line = d3.line()
-           .x( d => d.x)
-           .y( d => d.y);
    }
 
    update() {
@@ -83,18 +79,15 @@ class BarChart {
    render() {
         let self = this;
 
-        self.chart.selectAll("circle")
-            .data(self.data)
+        self.chart.selectAll("rect")
+            .data(salf.data)
             .enter()
-            .append("circle")
-            .attr("cx", d => self.xscale( d.x ) )
-            .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r );
-            .append("path")
-            .attr("d", line(data))
-            .attr("stroke", "black")
-            .attr("fill", "none")
-
+            .append("rect")
+            .attr("x", d => self.xscale( d.x ) )
+            .attr("y", d => self.yscale( d.y ) )
+	    .attr("width", d => d.w );
+	    .attr("height", d => d.h );
+       
         self.xaxis_group
             .call( self.xaxis );
 
