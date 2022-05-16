@@ -1,4 +1,4 @@
-d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data2.csv")
+d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data_test.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; d.w = +d.w; d.h = +d.h; });
 
@@ -65,13 +65,13 @@ class BarChart {
    update() {
         let self = this;
 
-        const xmin = d3.min( self.data, d => d.w );
-        const xmax = d3.max( self.data, d => d.w );
+        const xmin = d3.min( self.data, d => d.x );
+        const xmax = d3.max( self.data, d => d.x );
         self.xscale.domain( [0, xmax+10] );
 
         const ymin = d3.min( self.data, d => d.y );
         const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [0, ymax+50] );
+        self.yscale.domain( [0, ymax+10] );
 
         self.render();
    }
@@ -79,25 +79,25 @@ class BarChart {
    render() {
        let self = this;
 
-//       self.chart.selectAll("circle")
-//           .data(self.data)
-//           .enter()
-//           .append("circle")
-//           .attr("cx", d => self.xscale( d.x ))
-//           .attr("cy", d => self.yscale( d.y ))
-//           .attr("r", d => d.r);
+       self.chart.selectAll("circle")
+           .data(self.data)
+           .enter()
+           .append("circle")
+           .attr("cx", d => self.xscale( d.x ))
+           .attr("cy", d => self.yscale( d.y ))
+           .attr("r", d => d.r);
 //           .attr("cx", function(d){ return d.x; })
 //           .attr("cy", function(d){ return d.y; })
 //           .attr("r", function(d){ return d.r; })
 
-       self.chart.selectAll("rect")
-           .data(self.data)
-           .enter()
-           .append("rect")
-           .attr("x", d => 0 )
-           .attr("y", d => self.yscale( d.y ))
-	   .attr("width", d => self.xscale( d.w ))
-	   .attr("height", d => d.h );
+//       self.chart.selectAll("rect")
+//           .data(self.data)
+//           .enter()
+//           .append("rect")
+//           .attr("x", d => d.x )
+//           .attr("y", d => d.y )
+//	   .attr("width", d => d.w );
+//	   .attr("height", d => d.h );
 
        self.xaxis_group
            .call( self.xaxis );
