@@ -1,6 +1,6 @@
 d3.csv("https://atsuta01.github.io/InfoVis2022_at/W08/data2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; d.w = +d.w; d.h = +d.h; });
+        data.forEach( d => { d.x = +d.x; d.y = +d.y; d.w = +d.w; d.h = +d.h; d.yl = +d.yl});
 
         var config = {
             parent: '#drawing_region',
@@ -97,13 +97,21 @@ class BarChart {
            .attr("x", d => 0 )
            .attr("y", d => self.yscale( d.y ))
 	   .attr("width", d => self.xscale( d.w ))
-	   .attr("height", d => d.h );
+           .attr("height", d => d.h );
+
+       	self.chart.selectAll("text")
+	   .data(self.data)
+	   .enter()
+	   .append("text")
+	   .attr("x", -15)
+	   .attr("y", d => d.yl)
+	   .text(d => d.s);
 
        self.xaxis_group
            .call( self.xaxis );
 
-       self.yaxis_group
-	   .call( self.yaxis );
+//       self.yaxis_group
+//	   .call( self.yaxis );
     }
 }
     
